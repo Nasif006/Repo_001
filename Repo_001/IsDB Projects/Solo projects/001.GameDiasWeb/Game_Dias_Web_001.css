@@ -1,0 +1,30 @@
+.nav-link {
+    color: rgb(172, 179, 179);
+}
+.nav-link:hover {
+    font-weight : bold;
+}
+
+#foot {
+    background-color: rgb(51, 51, 51);
+    color: rgb(167, 167, 167);
+}
+#foot:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    color: rgb(218, 218, 157);
+}
+
+.footer {
+    list-style: none;
+}
+
+.Foot_Header {
+    color: rgb(218, 218, 157);
+}
+
+#rights {
+    height: 60px;
+    color: white;
+    text-align: center;
+}
