@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="qlo"></div>
+        <div class="qlt"></div>
+        <div class="ansc">
+            <input type="number" name="" class="inp">
+        </div>
+    </div>
+    <div class="res"></div>
+    <div>
+        <button type="button" class="get" onclick="get()"> Get Math</button>
+        <button type="button" class="check" onclick="check()">Check</button>
+    </div>
+</body>
+
+<script>
+
+    let qlo, qlt, res;
+
+    function get () {
+        qlo = Math.floor(Math.random() * 900) + 100;
+        qlt = Math.floor(Math.random() * 900) + 100;
+        res = qlo * qlt;
+
+        document.getElementsByClassName("qlo")[0].innerHTML = qlo;
+        document.getElementsByClassName("qlt")[0].innerHTML = qlt;
+
+
+    }
+
+    function check () {
+
+        let ansc = document.getElementsByClassName("inp")[0].value;
+        let r = '<h3 style="background-color: lightblue;">correct!</h3>';
+        let w = '<h3 style="background-color: red;">wrong!</h3>';
+
+        if (parseInt(ansc) == res ){
+            document.getElementsByClassName("res")[0].innerHTML = r;
+        }else{
+            document.getElementsByClassName("res")[0].innerHTML = w;
+        }
+    }
+
+</script>
+
+</html>
