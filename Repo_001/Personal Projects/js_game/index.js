@@ -23,8 +23,7 @@ class sprite {
             this.draw()
             this.position.y += this.velocity.y
         }else{
-             this.draw()
-             this.fillRect( this.position.x, this.position.y, 150,50)
+             c.fillRect( this.position.x, this.position.y, 150,50)
              this.position.x += this.velocity.y
              console.log("aa")
         }

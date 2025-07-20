@@ -8,6 +8,7 @@
 <body>
     <div class="container">
         <div class="qlo"></div>
+        <div class="op"></div>
         <div class="qlt"></div>
         <div class="ansc">
             <input type="number" name="" class="inp">
@@ -22,15 +23,27 @@
 
 <script>
 
-    let qlo, qlt, res;
+    let qlo, qlt, op, res;
 
     function get () {
         qlo = Math.floor(Math.random() * 900) + 100;
         qlt = Math.floor(Math.random() * 900) + 100;
-        res = qlo * qlt;
+        op = Math.random() < 0.5 ? "*" : "/";
+
+        if(op == "*"){
+            res = qlo+op+qlt;
+        }else{
+            if(qlo<qlt){
+                this.qlo && this.qlt;
+            }else{
+                res = qlo+op+qlt;
+            }
+        }
+        
 
         document.getElementsByClassName("qlo")[0].innerHTML = qlo;
         document.getElementsByClassName("qlt")[0].innerHTML = qlt;
+        document.getElementsByClassName("op")[0].innerHTML = op;
 
 
     }
