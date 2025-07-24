@@ -35,6 +35,12 @@ class sprite {
         }else{
             this.velocity.y += gravity
         }
+
+        // if (this.position.y + this.height == canvas.height){
+        //     jumpcheck = -10
+        // }else{
+        //     jumpcheck = 0
+        // }
        
     }
 }
@@ -72,11 +78,15 @@ window.addEventListener("keydown", (event) => {
             player.velocity.x = -1
             break
 
-        case ' ' :
-            player.velocity.y = -10
-            break
+        // case ' ' :
+        //     player.velocity.y = this.jumpcheck
+        //     break
+        
+            
+            
     }
     console.log(event.key)
+    console.log(this.jumpcheck)
 })
 
 
@@ -90,10 +100,9 @@ window.addEventListener("keyup", (event) => {
             player.velocity.x = 0
             break
 
-        case ' ' :
-            player.velocity.x = 0
-            break
+        // case ' ' :
+        //     player.velocity.x = 0
+        //     break
     }
-    console.log(event.key)
 })
 </script>
