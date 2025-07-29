@@ -17,6 +17,7 @@ class sprite {
         this.velocity= velocity
         this.height = 150
         this.color= color
+        this.lastkey
     }
 
     draw (){
@@ -34,7 +35,8 @@ class sprite {
             this.velocity.y = 0
         }else{
             this.velocity.y += gravity
-        }   
+        }
+
     }
 }
 
@@ -57,16 +59,16 @@ const keys = {
     },
     d : {
         pressed : false
+    },
+
+    ArrowLeft : {
+        pressed : false
+    },
+    ArrowRight : {
+        pressed : false
     }
+    
 }
-
-if (player.position.y + player.height == canvas.height){
-            jumpcheck = -10
-        }else{
-            jumpcheck = 0
-        }
-
-let lastkey
 
 function animate () {
     window.requestAnimationFrame(animate)
@@ -76,11 +78,20 @@ function animate () {
     enemy.update()
 
     player.velocity.x = 0
+    enemy.velocity.x = 0
     
+    //player movement
     if (keys.a.pressed && lastkey === 'a') {
         player.velocity.x = -1
     }else if (keys.d.pressed && lastkey === 'd') {
         player.velocity.x = 1
+    }
+
+    //enemy movement
+    if (keys.ArrowLeft.pressed && enemy.lastkey === 'ArrowLeft') {
+        enemy.velocity.x = -1
+    }else if (keys.ArrowRight.pressed && enemy.lastkey === 'ArrowRight') {
+        enemy.velocity.x = 1
     }
 }
 
@@ -99,14 +110,25 @@ window.addEventListener("keydown", (event) => {
             break
 
         case 'w' :
-            player.velocity.y = jumpcheck
+            player.velocity.y = -10
+            break
+
+        case 'ArrowRight' :
+            keys.ArrowRight.pressed = true
+            enemy.lastkey = 'ArrowRight'
             break
         
-            
-            
+        case 'ArrowLeft' :
+            keys.ArrowLeft.pressed = true
+            enemy.lastkey = 'ArrowLeft'
+            break
+
+        case 'ArrowUp' :
+            enemy.velocity.y = -10
+            break
+                   
     }
     console.log(event.key)
-    console.log('y'+player.jumpcheck)
 })
 
 
@@ -120,9 +142,15 @@ window.addEventListener("keyup", (event) => {
             keys.a.pressed = false
             break
 
-        case 'w' :
-            player.velocity.x = jumpcheck
+        //enemy
+        case 'ArrowRight' :
+            keys.ArrowRight.pressed = false
             break
+        
+        case 'ArrowLeft' :
+            keys.ArrowLeft.pressed = false
+            break
+
     }
 })
 </script>
