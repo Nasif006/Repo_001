@@ -18,11 +18,19 @@ class sprite {
         this.height = 150
         this.color= color
         this.lastkey
+        this.attackBox = {
+            position : this.position,
+            width : 100,
+            height : 50
+        }
     }
 
     draw (){
         c.fillStyle = this.color
         c.fillRect(this.position.x, this.position.y, 50, this.height)
+
+        //attack Box
+        c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
     }
 
     update (){
