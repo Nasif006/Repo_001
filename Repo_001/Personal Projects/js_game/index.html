@@ -1,16 +1,27 @@
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
 <body>
     
-    <div>
+    <div style="position: relative; display: inline-block;">
 
-        <!-- Player health-->
-        <div></div>
+        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px;">
+            <!-- Player health-->
+            <div style="width: 100%; height: 40px; background-color: yellow;"></div>
 
-        <!-- Timer-->
-        <div></div>
+            <!-- Timer-->
+            <div style="width: 100px; height: 100px; background-color: red; flex-shrink: 0;"></div>
 
-        <!-- enemy health-->
-        <div></div>
+            <!-- enemy health-->
+            <div id="enemyHealthBar" style="width: 100%; height: 40px; background-color: yellow;"></div>
 
+        </div>
+        
         <canvas></canvas>
     </div>
         
@@ -153,6 +164,7 @@
             player.isAttacking){
             enemy.color='orange'
             player.isAttacking = false
+            document.querySelector('#enemyHealthBar').style.width = '50%'
         }else{
             enemy.color='red'
         }
