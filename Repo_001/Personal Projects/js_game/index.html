@@ -12,15 +12,23 @@
 
         <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px;">
             <!-- Player health-->
-            <div style="width: 100%; height: 40px; background-color: yellow;"></div>
+            <div style="position: relative; width: 100%; height: 40px; display: flex; justify-content: flex-end;">
+                <div style=" height: 40px; width: 100%; background-color: yellow;"></div>
+                <div id="playerHealthBar" style="position: absolute; background: blue; top: 0; right: 0; bottom: 0; width: 100%;"></div>
+            </div>
 
             <!-- Timer-->
-            <div style="width: 100px; height: 100px; background-color: red; flex-shrink: 0;"></div>
+            <div id="timer" style="width: 100px; height: 100px; background-color: red; flex-shrink: 0;display: flex; justify-content: center; align-items: center;">10</div>
 
             <!-- enemy health-->
-            <div id="enemyHealthBar" style="width: 100%; height: 40px; background-color: yellow;"></div>
+            <div style="position: relative; width: 100%; height: 40px;">
+                <div style=" height: 40px; background-color: yellow;"></div>
+                <div id="enemyHealthBar" style="position: absolute; background: blue; top: 0; right: 0; bottom: 0; left: 0;"></div>
+            </div>
 
         </div>
+        <!-- results-->
+        <div id="result" style="position: absolute; color: white; align-items: center; justify-content: center; top: 0; right: 0;left: 0; bottom: 0; display: none;">Result</div>
         
         <canvas></canvas>
     </div>
@@ -55,6 +63,7 @@
                 height : 50
             }
             this.isAttacking = false
+            this.health = 100
         }
 
         draw (){
@@ -132,6 +141,34 @@
         )
     }
 
+    function determineWinner ({player, enemy, timerId}){
+        clearTimeout(timerId)
+        document.querySelector("#result").style.display = "flex";
+            if (player.health === enemy.health) {
+                document.querySelector("#result").innerHTML = "Draw" 
+            }else if (player.health > enemy.health) {
+                document.querySelector("#result").innerHTML = "Player 1 Wins"
+            }else if (player.health < enemy.health) {
+                document.querySelector("#result").innerHTML = "Player 2 Wins"
+            }
+    }
+
+    let timer = 20;
+    let timerId
+    function decreaseTimer () {
+        if (timer > 0){
+            timerId = setTimeout(decreaseTimer, 1000)
+            timer--
+            document.querySelector("#timer").innerHTML = timer
+        }
+
+        if (timer === 0) {
+            determineWinner ({player, enemy, timerId})
+        }
+    }
+
+    decreaseTimer ()
+
     function animate () {
         window.requestAnimationFrame(animate)
         c.fillStyle = 'black'
@@ -164,7 +201,8 @@
             player.isAttacking){
             enemy.color='orange'
             player.isAttacking = false
-            document.querySelector('#enemyHealthBar').style.width = '50%'
+            enemy.health -= 20
+            document.querySelector('#enemyHealthBar').style.width = enemy.health + '%'
         }else{
             enemy.color='red'
         }
@@ -176,8 +214,16 @@
             enemy.isAttacking){
             player.color='orange'
             enemy.isAttacking = false
+            player.health -= 20
+            document.querySelector('#playerHealthBar').style.width = player.health + '%'
         }else{
             player.color='green'
+        }
+
+        // endgame result based on health
+
+        if (enemy.health <= 0 || player.health <= 0){
+            determineWinner ({player, enemy, timerId})
         }
     }
 
