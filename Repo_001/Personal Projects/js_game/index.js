@@ -14,9 +14,10 @@ const background = new Sprite ({
 })
 
 const shop = new Sprite ({
-    position : {x : 0, y : 0},
+    position : {x : 600, y : 128},
     imageSrc : "./assets/shop.png",
-    scale : 2.75
+    scale : 2.75,
+    frameMax : 6
 })
 
 const player = new Fighter ({
