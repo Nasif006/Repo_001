@@ -43,7 +43,7 @@ class Sprite {
 }
 
 
-class Fighter {
+class Fighter extends Sprite {
         constructor({position, velocity, color='blue', offset}){
             this.position= position
             this.velocity= velocity
