@@ -24,7 +24,12 @@ const player = new Fighter ({
     position : {x : 100, y : 0},
     velocity : {x : 0, y : 0},
     offset : { x : 0, y : 0},
-    color : 'green'})
+    // color : 'green',
+    imageSrc : "./assets/samuraiMack/Idle.png",
+    scale : 2.5,
+    frameMax : 8,
+    offset : { x: 215, y: 157 }
+})
 
 const enemy = new Fighter ({
     position : {x : 900, y : 0},
