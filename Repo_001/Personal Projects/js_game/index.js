@@ -28,7 +28,18 @@ const player = new Fighter ({
     imageSrc : "./assets/samuraiMack/Idle.png",
     scale : 2.5,
     frameMax : 8,
-    offset : { x: 215, y: 157 }
+    offset : { x: 215, y: 157 },
+    sprites : {
+        idle : {
+            imageSrc : "./assets/samuraiMack/Idle.png",
+            frameMax : 8,
+        },
+
+        run : {
+            imageSrc : "./assets/samuraiMack/Run.png",
+            frameMax : 8,
+        }
+    }
 })
 
 const enemy = new Fighter ({
@@ -68,7 +79,7 @@ function animate () {
     background.update()
     shop.update()
     player.update()
-    enemy.update()
+    // enemy.update()
 
     player.velocity.x = 0
     enemy.velocity.x = 0

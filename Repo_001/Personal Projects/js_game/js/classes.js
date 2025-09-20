@@ -27,8 +27,7 @@ class Sprite {
             this.image.height * this.scale)
     }
 
-    update (){
-        this.draw()
+    animateFrames () {
         this.framesElasped ++
 
         if (this.framesElasped % this.framesHold === 0 ){
@@ -38,7 +37,11 @@ class Sprite {
                 this.framesCurrent = 0
             }
         }
+    }
 
+    update (){
+        this.draw()
+        this.animateFrames()
         
     }
 
@@ -46,7 +49,7 @@ class Sprite {
 
 
 class Fighter extends Sprite {
-        constructor({position, velocity, color='blue', imageSrc, scale= 1, frameMax =1, offset = { x:0, y:0}}){
+        constructor({position, velocity, color='blue', imageSrc, scale= 1, frameMax =1, offset = { x:0, y:0}, sprites }){
             super ({position, imageSrc, scale, frameMax, offset})
 
             this.color = color
@@ -68,22 +71,20 @@ class Fighter extends Sprite {
             this.framesCurrent = 0
             this.framesElasped =0
             this.framesHold = 9 
+            this.sprites = sprites
+
+            for (sprite in sprites){
+                sprites[sprite].image = new Image ()
+                sprites[sprite].image.src = sprites[sprite].imageSrc
+            }
         }
 
 
 
         update (){
             this.draw()
-            this.framesElasped ++
-
-            if (this.framesElasped % this.framesHold === 0 ){
-                if (this.framesCurrent < this.frameMax - 1) {
-                    this.framesCurrent++
-                }else{
-                    this.framesCurrent = 0
-                }
-            }
-
+            this.animateFrames()
+            
             this.attackBox.position.x = this.position.x + this.attackBox.offset.x
             this.attackBox.position.y = this.position.y
 
